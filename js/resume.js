@@ -1,7 +1,7 @@
 (function ($) {
     ("use strict"); // Start of use strict
 
-    $("#URL").val(location.origin);
+    $("#URL").val(location.hostname);
     // Smooth scrolling using jQuery easing
     $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function () {
         if (
@@ -74,9 +74,6 @@
                 $.ajax({
                     type: "POST",
                     data: $(form).serialize(),
-                    headers: {
-                        "Access-Control-Allow-Origin": `*`,
-                    },
                     url: `https://uranuom.com/mail.php`,
                     success: function (data) {
                         console.log(data);
@@ -87,7 +84,7 @@
                             $(".contact-form").fadeTo("slow", 1, function () {
                                 $(".contact-form .msg-success").slideDown();
                             });
-                            $(".contact-form").resetForm();
+                            $(form).resetForm();
                         } else {
                             $(".contact-form .msg-failed").html(
                                 `Something went wrong, please try again later`
@@ -97,7 +94,8 @@
                             });
                         }
                     },
-                    error: function () {
+                    error: function (error) {
+                        console.log(error);
                         $(".contact-form .msg-failed").html(
                             `Something went wrong, please try again later`
                         );
