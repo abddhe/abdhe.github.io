@@ -74,7 +74,7 @@
                 $.ajax({
                     type: "POST",
                     data: $(form).serialize(),
-                    url: `https://uranuom.com/mail.php`,
+                    url: `mail.php`,
                     success: function (data) {
                         console.log(data);
                         if (data == 1) {
@@ -84,7 +84,7 @@
                             $(".contact-form").fadeTo("slow", 1, function () {
                                 $(".contact-form .msg-success").slideDown();
                             });
-                            $(form).resetForm();
+                            form.resetForm();
                         } else {
                             $(".contact-form .msg-failed").html(
                                 `Something went wrong, please try again later`
